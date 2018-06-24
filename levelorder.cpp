@@ -95,6 +95,36 @@ public:
 			delete it;
 		}
 	}
+	void delete_key(int key_val)
+	{
+		queue < mytree * > temp;
+		mytree *it = this,*key_pt = nullptr;
+
+		while(it != nullptr)
+		{
+			if(it->left_node != nullptr)
+			{
+				temp.push(it->left_node);
+			}
+			if(it->right_node != nullptr)
+			{
+				temp.push(it->right_node);
+			}
+			if(temp.empty())
+			{
+				break;
+			}
+			it = temp.front();
+			temp.pop();
+			if(it->data == key_val)
+			{
+				key_pt = it;
+			}
+		}
+		key_pt->data = it->data;
+
+		this->delete_node();
+	}
 	mytree *& left()
 	{
 		return this->left_node;
@@ -124,7 +154,7 @@ int main()
 	obj->levelordertraverse();
 
 	
-	obj->delete_node();
+	obj->delete_key(3);
 	cout<<endl;
 
 	obj->levelordertraverse();
