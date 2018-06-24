@@ -23,9 +23,14 @@ public:
 		while(it != nullptr)
 		{
 			cout<<it->data<<" ";
+			if(it->left_node != nullptr)
 			temp.push(it->left_node);
+			if(it->right_node != nullptr)
 			temp.push(it->right_node);
-
+			if(temp.empty())
+			{
+				return;
+			}
 			it = temp.front();
 			temp.pop();
 		}
@@ -49,12 +54,45 @@ public:
 			}
 			else
 			{
+				if(it->left_node != nullptr)
 				temp.push(it->left_node);
+				if(it->right_node != nullptr)
 				temp.push(it->right_node);
 
 				it = temp.front();
 				temp.pop();
 			}
+		}
+	}
+	void delete_node()
+	{
+		queue < mytree * > temp;
+	    mytree *it = this, *parent = nullptr;
+
+		while(it != nullptr)
+		{
+			
+			if(it->left_node != nullptr) {
+				temp.push(it->left_node);
+				parent = it;
+			}
+			if(it->right_node != nullptr){
+				temp.push(it->right_node);
+				parent = it;
+			}
+
+			it = temp.front();
+			temp.pop();
+		}
+		if(parent->right_node != nullptr) {
+			it = parent->right_node;
+			parent->right_node = nullptr;
+			delete it;
+		}
+		else {
+			it = parent->left_node;
+			parent->left_node = nullptr;
+			delete it;
 		}
 	}
 	mytree *& left()
@@ -84,6 +122,14 @@ int main()
 	obj->insert_node(7);
 
 	obj->levelordertraverse();
+
+	
+	obj->delete_node();
+	cout<<endl;
+
+	obj->levelordertraverse();
+
+
 
 	return 0;
 }
