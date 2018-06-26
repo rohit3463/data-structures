@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<stack>
 
 using namespace std;
 class mytree
@@ -137,6 +138,41 @@ public:
 	{
 		cout<<this->data<<" ";
 	}
+	void reverselevelorder()
+	{
+		stack < mytree * > temp;
+
+		queue < mytree * > q;
+
+		mytree * it = this ;
+
+		temp.push(it);
+
+		while(it != nullptr)
+		{
+			if(it->right_node != nullptr)
+			q.push(it->right_node);
+			if(it->left_node != nullptr)
+			q.push(it->left_node);
+
+			if(q.empty())
+			{
+				break;
+			}
+			it = q.front();
+
+			q.pop();
+
+			temp.push(it);
+		}
+		while(!temp.empty())
+		{
+			cout<<temp.top()->data<<" ";
+
+			temp.pop();
+		}
+		cout<<endl;
+	}
 
 };
 
@@ -153,11 +189,9 @@ int main()
 
 	obj->levelordertraverse();
 
-	
-	obj->delete_key(3);
 	cout<<endl;
 
-	obj->levelordertraverse();
+	obj->reverselevelorder();
 
 
 
