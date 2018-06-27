@@ -173,19 +173,71 @@ public:
 		}
 		cout<<endl;
 	}
-
+friend bool continoustree(struct mytree * );
 };
+bool continoustree(struct mytree * node)
+	{
+		if(node==nullptr)
+		{
+			return true;
+		}
+		if(node->left_node == nullptr && node->right_node == nullptr)
+		{
+			return true;
+		}
+		if(node->left_node == nullptr)
+		{
+			return (abs(node->data - node->right_node->data) ==1 && continoustree(node->right_node));
+		}
+		if(node->right_node == nullptr)
+		{
+			return (abs(node->data - node->left_node->data)==1 && continoustree(node->left_node));
+		}
+
+		return (abs(node->data - node->left_node->data) == 1) && (abs(node->data - node->right_node->data) == 1) && (continoustree(node->left_node)) && (continoustree(node->right_node));
+	}
 
 int main()
 {
-	mytree * obj = new mytree(1);
+	mytree * obj = new mytree(3);
 
 	obj->insert_node(2);
-	obj->insert_node(3);
 	obj->insert_node(4);
+	obj->insert_node(1);
+	obj->insert_node(3);
+
+	if(continoustree(obj))
+	{
+		cout<<"Yes"<<endl;
+	}
+	else
+	{
+		cout<<"No"<<endl;
+	}
 	obj->insert_node(5);
-	obj->insert_node(6);
-	obj->insert_node(7);
+	obj->insert_node(3);
+
+
+	if(continoustree(obj))
+	{
+		cout<<"Yes"<<endl;
+	}
+	else
+	{
+		cout<<"No"<<endl;
+	}
+
+	obj->insert_node(5);
+
+	if(continoustree(obj))
+	{
+		cout<<"Yes"<<endl;
+	}
+	else
+	{
+		cout<<"No"<<endl;
+	}
+
 
 	obj->levelordertraverse();
 
