@@ -28,26 +28,6 @@ public:
 	{
 		cout<<this->data<<" ";
 	}
-	void levelordertraverse()
-	{
-		queue < mytree * > temp;
-		mytree * it = this ;
-
-		while(it != nullptr)
-		{
-			cout<<it->data<<" ";
-			if(it->left_node != nullptr)
-			temp.push(it->left_node);
-			if(it->right_node != nullptr)
-			temp.push(it->right_node);
-			if(temp.empty())
-			{
-				return;
-			}
-			it = temp.front();
-			temp.pop();
-		}
-	}
 	void insert_node(int taken)
 	{
 		queue < mytree * > temp;
@@ -77,6 +57,57 @@ public:
 			}
 		}
 	}
+	void delete_node()
+	{
+		queue < mytree * > temp;
+	    mytree *it = this, *parent = nullptr;
+
+		while(it != nullptr)
+		{
+			
+			if(it->left_node != nullptr) {
+				temp.push(it->left_node);
+				parent = it;
+			}
+			if(it->right_node != nullptr){
+				temp.push(it->right_node);
+				parent = it;
+			}
+
+			it = temp.front();
+			temp.pop();
+		}
+		if(parent->right_node != nullptr) {
+			it = parent->right_node;
+			parent->right_node = nullptr;
+			delete it;
+		}
+		else {
+			it = parent->left_node;
+			parent->left_node = nullptr;
+			delete it;
+		}
+	}
+	void levelordertraverse()
+	{
+		queue < mytree * > temp;
+		mytree * it = this ;
+
+		while(it != nullptr)
+		{
+			cout<<it->data<<" ";
+			if(it->left_node != nullptr)
+			temp.push(it->left_node);
+			if(it->right_node != nullptr)
+			temp.push(it->right_node);
+			if(temp.empty())
+			{
+				return;
+			}
+			it = temp.front();
+			temp.pop();
+		}
+	}
 
 };
 
@@ -90,6 +121,8 @@ int main()
 	obj->insert_node(5);
 	obj->insert_node(6);
 	obj->insert_node(7);
+
+	obj->delete_node();
 
 	obj->levelordertraverse();
 
