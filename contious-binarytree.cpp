@@ -138,14 +138,14 @@ bool continoustree(struct mytree * node)
 
 int main()
 {
-	mytree * obj = new mytree(1);
+	mytree * obj = new mytree(3);
 
 	obj->insert_node(2);
-	obj->insert_node(3);
 	obj->insert_node(4);
+	obj->insert_node(1);
+	obj->insert_node(3);
 	obj->insert_node(5);
-	obj->insert_node(6);
-	obj->insert_node(7);
+	obj->insert_node(3);
 
 	if(continoustree(obj))
 	{
