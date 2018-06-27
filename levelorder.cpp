@@ -65,67 +65,7 @@ public:
 			}
 		}
 	}
-	void delete_node()
-	{
-		queue < mytree * > temp;
-	    mytree *it = this, *parent = nullptr;
 
-		while(it != nullptr)
-		{
-			
-			if(it->left_node != nullptr) {
-				temp.push(it->left_node);
-				parent = it;
-			}
-			if(it->right_node != nullptr){
-				temp.push(it->right_node);
-				parent = it;
-			}
-
-			it = temp.front();
-			temp.pop();
-		}
-		if(parent->right_node != nullptr) {
-			it = parent->right_node;
-			parent->right_node = nullptr;
-			delete it;
-		}
-		else {
-			it = parent->left_node;
-			parent->left_node = nullptr;
-			delete it;
-		}
-	}
-	void delete_key(int key_val)
-	{
-		queue < mytree * > temp;
-		mytree *it = this,*key_pt = nullptr;
-
-		while(it != nullptr)
-		{
-			if(it->left_node != nullptr)
-			{
-				temp.push(it->left_node);
-			}
-			if(it->right_node != nullptr)
-			{
-				temp.push(it->right_node);
-			}
-			if(temp.empty())
-			{
-				break;
-			}
-			it = temp.front();
-			temp.pop();
-			if(it->data == key_val)
-			{
-				key_pt = it;
-			}
-		}
-		key_pt->data = it->data;
-
-		this->delete_node();
-	}
 	mytree *& left()
 	{
 		return this->left_node;
@@ -138,101 +78,8 @@ public:
 	{
 		cout<<this->data<<" ";
 	}
-	void inorderstack()
-	{
-		mytree * current = this;
-		stack < mytree * > pandu;
 
-		while(true)
-		{
-			if(current != nullptr)
-			{
-				pandu.push(current);
-
-				current = current->left_node;
-			}
-
-			else
-			{
-				
-				if(!pandu.empty())
-				{
-					current = pandu.top();
-
-					pandu.pop();
-
-					cout<<current->data<<" ";
-
-					current = current->right_node;
-				}
-				else
-				{
-					return;
-				}
-
-
-			}
-		}
-			
-	}
-	void reverselevelorder()
-	{
-		stack < mytree * > temp;
-
-		queue < mytree * > q;
-
-		mytree * it = this ;
-
-		temp.push(it);
-
-		while(it != nullptr)
-		{
-			if(it->right_node != nullptr)
-			q.push(it->right_node);
-			if(it->left_node != nullptr)
-			q.push(it->left_node);
-
-			if(q.empty())
-			{
-				break;
-			}
-			it = q.front();
-
-			q.pop();
-
-			temp.push(it);
-		}
-		while(!temp.empty())
-		{
-			cout<<temp.top()->data<<" ";
-
-			temp.pop();
-		}
-		cout<<endl;
-	}
-friend bool continoustree(struct mytree * );
 };
-bool continoustree(struct mytree * node)
-	{
-		if(node==nullptr)
-		{
-			return true;
-		}
-		if(node->left_node == nullptr && node->right_node == nullptr)
-		{
-			return true;
-		}
-		if(node->left_node == nullptr)
-		{
-			return (abs(node->data - node->right_node->data) ==1 && continoustree(node->right_node));
-		}
-		if(node->right_node == nullptr)
-		{
-			return (abs(node->data - node->left_node->data)==1 && continoustree(node->left_node));
-		}
-
-		return (abs(node->data - node->left_node->data) == 1) && (abs(node->data - node->right_node->data) == 1) && (continoustree(node->left_node)) && (continoustree(node->right_node));
-	}
 
 int main()
 {
@@ -245,7 +92,7 @@ int main()
 	obj->insert_node(6);
 	obj->insert_node(7);
 
-	obj->inorderstack();
+	obj->levelordertraverse();
 
 
 	return 0;
