@@ -138,6 +138,43 @@ public:
 	{
 		cout<<this->data<<" ";
 	}
+	void inorderstack()
+	{
+		mytree * current = this;
+		stack < mytree * > pandu;
+
+		while(true)
+		{
+			if(current != nullptr)
+			{
+				pandu.push(current);
+
+				current = current->left_node;
+			}
+
+			else
+			{
+				
+				if(!pandu.empty())
+				{
+					current = pandu.top();
+
+					pandu.pop();
+
+					cout<<current->data<<" ";
+
+					current = current->right_node;
+				}
+				else
+				{
+					return;
+				}
+
+
+			}
+		}
+			
+	}
 	void reverselevelorder()
 	{
 		stack < mytree * > temp;
@@ -199,52 +236,16 @@ bool continoustree(struct mytree * node)
 
 int main()
 {
-	mytree * obj = new mytree(3);
+	mytree * obj = new mytree(1);
 
 	obj->insert_node(2);
+	obj->insert_node(3);
 	obj->insert_node(4);
-	obj->insert_node(1);
-	obj->insert_node(3);
-
-	if(continoustree(obj))
-	{
-		cout<<"Yes"<<endl;
-	}
-	else
-	{
-		cout<<"No"<<endl;
-	}
 	obj->insert_node(5);
-	obj->insert_node(3);
+	obj->insert_node(6);
+	obj->insert_node(7);
 
-
-	if(continoustree(obj))
-	{
-		cout<<"Yes"<<endl;
-	}
-	else
-	{
-		cout<<"No"<<endl;
-	}
-
-	obj->insert_node(5);
-
-	if(continoustree(obj))
-	{
-		cout<<"Yes"<<endl;
-	}
-	else
-	{
-		cout<<"No"<<endl;
-	}
-
-
-	obj->levelordertraverse();
-
-	cout<<endl;
-
-	obj->reverselevelorder();
-
+	obj->inorderstack();
 
 
 	return 0;
