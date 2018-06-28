@@ -80,6 +80,7 @@ public:
         cout<<this->data<<" ";
     }
 friend bool foldable(mytree *);
+friend bool foldable_child(mytree *,mytree *);
 };
 
  bool foldable(mytree * current)
@@ -89,14 +90,16 @@ friend bool foldable(mytree *);
         {
             return true;
         }
-        else if(current->right_node != nullptr && current->left_node != nullptr)
-        {
-            return !(foldable(current->left_node->left_node) ^ foldable(current->right_node->right_node)) && !(foldable(current->left_node->right_node) ^ foldable(current->right_node->left_node));
-        }
-        else 
-        {
+       return foldable_child(current->left_node,current->right_node);
+    }
+bool foldable_child(mytree * n1,mytree * n2)
+    {
+        if(n1 == nullptr && n2 == nullptr)
+            return true;
+        if(n1 == nullptr || n2 == nullptr)
             return false;
-        }
+        else
+            return foldable_child(n1->left_node,n2->right_node) && foldable_child(n1->right_node,n2->left_node);
     }
 int main()
 {
@@ -107,8 +110,7 @@ int main()
     obj->insert_node(4);
     obj->insert_node(5);
     obj->insert_node(6);
-
-    obj->levelordertraverse();
+    obj->insert_node(7);
 
     if(foldable(obj))
     {
