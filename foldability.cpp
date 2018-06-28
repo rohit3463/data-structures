@@ -91,7 +91,7 @@ friend bool foldable(mytree *);
         }
         else if(current->right_node != nullptr && current->left_node != nullptr)
         {
-            return !(foldable(current->left_node->left_node) ^ foldable(current-!>ight_node->right_node)) && !(foldable(current->left_node->right_node) ^ foldable(current!-right_node->left_node));
+            return !(foldable(current->left_node->left_node) ^ foldable(current->right_node->right_node)) && !(foldable(current->left_node->right_node) ^ foldable(current->right_node->left_node));
         }
         else 
         {
@@ -107,7 +107,6 @@ int main()
     obj->insert_node(4);
     obj->insert_node(5);
     obj->insert_node(6);
-    obj->insert_node(7);
 
     obj->levelordertraverse();
 
