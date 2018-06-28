@@ -85,7 +85,7 @@ friend bool foldable(mytree *);
  bool foldable(mytree * current)
     {
 
-        if(current == nullptr || (current->left_node == nullptr && current->right_node == nullptr))
+        if(current == nullptr)
         {
             return true;
         }
