@@ -1,6 +1,7 @@
 #include<iostream>
 #include<queue>
 #include<stack>
+#include<climits>
 
 using namespace std;
 class mytree
@@ -36,6 +37,44 @@ public:
 			temp.pop();
 		}
 	}
+	void levelordertraverse_byline()
+	{
+		queue < mytree * > temp;
+		mytree * it = this ;
+		mytree * last = new mytree(INT_MIN);
+		mytree * nuller = new mytree(INT_MIN);
+		temp.push(nuller);
+
+		while(it != nullptr)
+		{
+
+			if(it->left_node != nullptr)
+			temp.push(it->left_node);
+			if(it->right_node != nullptr)
+			temp.push(it->right_node);
+		    if(it->data == INT_MIN)
+			{
+				cout<<endl;
+				temp.push(nuller);
+			}
+			else
+			{
+				cout<<it->data<<" ";
+			}
+			if(temp.empty())
+			{
+				return;
+			}
+			last = it;
+			it = temp.front();
+			if(last->data == INT_MIN && it->data == INT_MIN)
+			{
+				return;
+			}
+			temp.pop();
+		}
+	}
+	
 	void insert_node(int taken)
 	{
 		queue < mytree * > temp;
@@ -93,6 +132,11 @@ int main()
 	obj->insert_node(7);
 
 	obj->levelordertraverse();
+	cout<<endl;
+
+	cout<<endl;
+
+	obj->levelordertraverse_byline();
 
 
 	return 0;
