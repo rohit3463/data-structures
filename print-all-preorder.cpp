@@ -5,65 +5,74 @@
 
 using namespace std;
 
-void print_all_preorder(vector < int >& arr,int size)
+struct node
 {
-	vector < int > dup(arr);
+	int data;
 
-	set < vector < int> > hello;
+	node * left = nullptr;
 
-	do
+	node * right = nullptr;
+};
+
+void preorder(node * root)
+{
+	if(root == nullptr)
 	{
-		hello.insert(dup);
-		
+		return;
 	}
-	while(next_permutation(dup.begin() + 1,dup.begin() + size));
+	cout<<root->data<<" ";
 
-	for(int i=1;i<(size-1);i++)
-	{
-		dup = arr;
-		sort(dup.begin(),dup.begin() + i -1);
-		sort(dup.begin() + i + 1,dup.begin() + size-1);
+	preorder(root->left);
 
-		do
-		{
-			//cout<<i<<endl;
-			swap(*(dup.begin()),*(dup.begin() + i));
-			hello.insert(dup);
-			swap(*(dup.begin()),*(dup.begin() + i));
-		}
-		while(next_permutation(dup.begin(),dup.begin() + i ) || next_permutation(dup.begin() + i + 1,dup.begin() + size));
-	}
-	dup = arr;
-	do
-	{
-		swap(*(dup.begin()),*(dup.begin() + size-1));
-		hello.insert(dup);
-		swap(*(dup.begin()),*(dup.begin() + size-1));
-		//cout<<size<<endl;
-	}
-	while(next_permutation(dup.begin() , dup.end() - 1));
-
-	for(auto& y : hello)
-	{
-		for(auto& x : y)
-		{
-			cout<<x<<" ";
-		}
-		cout<<endl;
-	}
+	preorder(root->right);
 }
+
+vector < node * > print_all_preorder(int arr[],int start,int end)
+{
+	vector < node * > trees;
+	if(start>end)
+	{
+		trees.push_back(nullptr);
+		return trees;
+	}
+
+	for(int i=start ; i<=end ; i++)
+	{
+		vector < node * > ltrees = print_all_preorder(arr,start,i-1);
+		vector < node * > rtrees = print_all_preorder(arr,i+1,end);
+
+		for(int j = 0;j<ltrees.size();j++)
+		{
+			for(int k=0;k<rtrees.size();k++)
+			{
+				node * hello = new node;
+
+				hello->data  = arr[i];
+
+				hello->left = ltrees[j];
+
+				hello->right = rtrees[k];
+
+				trees.push_back(hello);
+			}
+		}
+	}
+
+	return trees;
+} 
 int main()
 {
-	vector < int > arr;
-	int temp;
+	int arr[] = {4,5,7};
 
-	for(int i =0;i<4;i++)
+	vector < node * > trees;
+
+	trees = print_all_preorder(arr,0,2);
+
+	for(auto& y: trees)
 	{
-		cin>>temp;
-
-		arr.push_back(temp);
+		preorder(y);
+		cout<<endl;
 	}
-	print_all_preorder(arr,arr.size());
 
 	return 0;
 }
