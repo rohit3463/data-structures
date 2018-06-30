@@ -54,7 +54,6 @@ void mirror_inorder(node * root)
 }
 int main()
 {
-	int arr[] = {4,5,7};
 
 	node * root = constr(1);
 
