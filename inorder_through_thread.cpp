@@ -52,6 +52,37 @@ void put_threads(vector < node * >& temp)
 	temp[temp.size()-1]->right = nullptr;
 	
 }
+void efficient_threads(node * root,node * parent = nullptr)
+{
+	if(root == nullptr)
+	{
+		return;
+	}
+	efficient_threads(root->left,root);
+	if(root->data != 7)
+	{
+		if(root->right == nullptr)
+		{
+			root->right = parent;
+			root->threaded =true;
+		}
+		else
+		{
+			efficient_threads(root->right,parent);
+		}
+	}
+	
+	
+}
+void rightmost(node *root){
+	if(root == nullptr)
+		return;
+	
+	
+	rightmost(root->right);
+
+	
+}
 
 struct node * leftmost(node * temp)
 {
@@ -100,17 +131,30 @@ int main()
 
 	root->left->left = constr(4);
 
+
+
 	root->left->right = constr(5);
 
 	root->right->left = constr(6);
+
+	root->right->left->right = constr(11);
 
 	root->right->right = constr(7);
 
 	inorder_to_vec(root,temp);
 
-	put_threads(temp);
+	//put_threads(temp);
+
+	//inorder_traversal_with_threads(root);
+
+	efficient_threads(root);
+	rightmost(root);
+
+	cout<<endl;
 
 	inorder_traversal_with_threads(root);
+
+
 
 	cout<<endl;
 
