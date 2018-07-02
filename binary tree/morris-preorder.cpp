@@ -1,3 +1,6 @@
+/*
+source - https://www.geeksforgeeks.org/morris-traversal-for-preorder/
+*/
 #include<iostream>
 #include<vector>
 
