@@ -1,3 +1,6 @@
+/*
+source - https://www.geeksforgeeks.org/foldable-binary-trees/
+*/
 #include<iostream>
 #include<queue>
 #include<stack>
