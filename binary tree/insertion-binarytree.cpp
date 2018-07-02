@@ -1,3 +1,6 @@
+/*
+source -https://www.geeksforgeeks.org/insertion-binary-tree/
+*/
 #include<iostream>
 #include<queue>
 #include<stack>
