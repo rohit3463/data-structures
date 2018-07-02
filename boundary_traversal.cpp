@@ -44,6 +44,11 @@ void boundary_traverse(mytree * root)
 
 	stack < mytree * > right_stack;
 
+	if(temp->left_node == nullptr)
+	{
+		cout<<temp->data<<" ";
+	}
+
 	if(temp->left_node != nullptr)
 	{
 		cout<<temp->data<<" ";
@@ -111,6 +116,15 @@ int main()
 
 	
 	boundary_traverse(root);
+
+	mytree *hello         = constr(1);
+    hello->left_node                = constr(2);
+    hello->left_node->left_node          = constr(3);
+    hello->left_node->right_node         = constr(4);
+    hello->left_node->right_node->left_node   = constr(5);
+    hello->left_node->right_node->right_node  = constr(6);
+    cout<<endl;
+    boundary_traverse(hello);
 	
 
 
