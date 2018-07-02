@@ -1,3 +1,6 @@
+/*
+source - https://www.geeksforgeeks.org/deletion-binary-tree/
+*/
 #include<iostream>
 #include<queue>
 #include<stack>
