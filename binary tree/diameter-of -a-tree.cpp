@@ -1,3 +1,6 @@
+/*
+source - https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
+*/
 #include<iostream>
 
 using namespace std;
