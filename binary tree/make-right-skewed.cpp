@@ -1,3 +1,6 @@
+/*
+source - https://www.geeksforgeeks.org/modify-binary-tree-get-preorder-traversal-using-right-pointers/
+*/
 #include<iostream>
 #include<queue>
 #include<stack>
