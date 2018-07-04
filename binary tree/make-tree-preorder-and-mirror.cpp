@@ -1,3 +1,6 @@
+/*
+source :- https://www.geeksforgeeks.org/construct-full-binary-tree-using-preorder-traversal-preorder-traversal-mirror-tree/
+*/
 #include<iostream>
 
 using namespace std;
