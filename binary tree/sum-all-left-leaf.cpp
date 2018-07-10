@@ -36,7 +36,7 @@ void inorder(node * root,int flag)
 		sum += root->data;
 	}
 
-	inorder(root->right,2);
+	inorder(root->right,0);
 }
 
 int main()
