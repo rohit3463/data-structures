@@ -21,26 +21,6 @@ struct node * newNode(char key)
 
 	return temp;
 }
-void find_level(node * root,int n1,int n2,int index,int& level1,int& level2)
-{
-	if(root == nullptr)
-	{
-		return;
-	}
-
-	if(root->data == n1)
-	{
-		level1 = index;
-	}
-	if(root->data == n2)
-	{
-		level2 = index;
-	}
-
-	find_level(root->left,n1,n2,index+1,level1,level2);
-	find_level(root->right,n1,n2,index+1,level1,level2);
-
-}
 
 node * find_LCA(node * root,int index,int n1,int n2,int& level_n1,int& level_n2)
 {
@@ -76,15 +56,6 @@ node * find_LCA(node * root,int index,int n1,int n2,int& level_n1,int& level_n2)
 	{
 		return right;
 	}
-}
-
-int distance_bw_nodes(node * LCA,int n1,int n2)
-{
-	int level_n1,level_n2;
-
-	find_level(LCA,n1,n2,0,level_n1,level_n2);
-
-	return level_n1 + level_n2 ;
 }
 
 int  main()
