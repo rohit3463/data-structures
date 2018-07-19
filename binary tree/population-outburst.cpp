@@ -26,9 +26,9 @@ int main()
         j=1;
         cin>>parent;
         cin>>kid;
-        level[parent] = level[hello.front().first];
+        level[parent] = level[hello.front().first] + 1;
         cout<<hello.front().first<<level[parent]<<hello.front().second<<endl;
-
+        
         hello.pop();
         
         while(kid--)
