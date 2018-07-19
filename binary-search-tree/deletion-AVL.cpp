@@ -15,8 +15,6 @@ struct node * newNode(int key)
 {
 	node * temp = new node;
 	temp->data = key;
-	temp->left = nullptr;
-	temp->right = nullptr;
 	temp->height = 1;
 
 	return temp;
@@ -29,31 +27,31 @@ int height(node * root)
 	}
 	return root->height;
 }
-node * leftRotate(node * x)
+node * leftRotate(node * z)
 {
-	node * y = x->right;
-	node * t = y->left;
+	node * y = z->right;
+	node * t2 = y->left;
 
-	y->left = x;
-	x->right = t;
+	y->left = z;
+	z->right = t2;
 
-	x->height = max(height(x->left),height(x->right)) + 1;
+	z->height = max(height(z->left),height(z->right)) + 1;
 	y->height = max(height(y->left),height(y->right)) + 1;
 
 	return y;
 }
-node * rightRotate(node * y)
+node * rightRotate(node * z)
 {
-	node * x = y->left;
-	node * t = x->right;
+	node * y = z->left;
+	node * t2 = y->right;
 
-	x->right = y;
-	y->left = t;
+	y->right = z;
+	z->left = t2;
 
-	y->height = max(height(x->left),height(x->right)) + 1;
-	x->height = max(height(y->left),height(y->right)) + 1;
+	z->height = max(height(z->left),height(z->right)) + 1;
+	y->height = max(height(y->left),height(y->right)) + 1;
 
-	return x;
+	return y;
 
 }
 
@@ -93,20 +91,20 @@ node * insert(node * root,int key)
 		{
 			return leftRotate(root);
 		}
-		if(key < root->right->data)
+		else if(key < root->right->data)
 		{
 			root->right = rightRotate(root->right);
 			return leftRotate(root);
 		}
 	}
-	if(balance > 1)
+	else if(balance > 1)
 	{
 		if(key > root->left->data)
 		{
 			root->left = leftRotate(root->left);
 			return rightRotate(root);
 		}
-		if(key < root->left->data)
+		else if(key < root->left->data)
 		{
 			return rightRotate(root);
 		}
@@ -118,7 +116,7 @@ node * minValueNode(node* node)
 {
     struct node* current = node;
  
-    while (current->left != NULL)
+    while (current->left != nullptr)
         current = current->left;
  
     return current;
@@ -224,19 +222,24 @@ void inorder(node * root)
 
 int main()
 {
-	node *root = NULL;
+	node *root = nullptr;
 	root = insert(root, 10);
-	root = insert(root, 20);
-	root = insert(root, 30);
-	root = insert(root, 40);
-	root = insert(root, 50);
-	root = insert(root, 25);
+	root = insert(root, 9);
+    root = insert(root, 5);
+    root = insert(root, 10);
+    root = insert(root, 0);
+    root = insert(root, 6);
+    root = insert(root, 11);
+    root = insert(root, -1);
+    root = insert(root, 1);
+    root = insert(root, 2);
+ 
 
 	inorder(root);
 
 	cout<<endl;
 
-	deleteNode(root,30);
+	root = deleteNode(root,10);
 
 	inorder(root);
 
