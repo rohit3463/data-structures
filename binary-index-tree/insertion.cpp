@@ -5,7 +5,7 @@ using namespace std;
 
 int getSum(vector < int >& BIT,int index)
 {
-	index = index + 1;
+	index = index - 1;
 
 	int sum = 0;
 
