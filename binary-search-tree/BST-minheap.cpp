@@ -29,7 +29,7 @@ node * getNode(node * root,int key)
 	{
 		root->left = getNode(root->left,key);
 	}
-	else if(key > root->data)
+	else if(key > root->data)	
 	{
 		root->right = getNode(root->right,key);
 	}
