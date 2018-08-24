@@ -54,7 +54,7 @@ int makeBIT(vector < int > arr,int n)
 
 int main()
 {
-	vector < int > arr {5,4,3,2,1};
+	vector < int > arr {5,4,3,2,1-};
 
 	int result = makeBIT(arr,arr.size());
 
